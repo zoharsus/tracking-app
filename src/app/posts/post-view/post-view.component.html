@@ -1,0 +1,13 @@
+<mat-card *ngIf="post">
+  <mat-panel-title>
+      <h2>{{ post.title }} </h2>
+  </mat-panel-title>
+
+    <p><b> Seller: </b> {{ post.seller }}</p>
+    <p><b> Tracking number: </b> {{ post.tracking }}</p>
+    <p><b> Status: </b> {{ post.status }}</p>
+    <p><b> Origin: </b> {{ post.origin }}</p>
+    <p><b> Destination: </b> {{ post.destination }}</p>
+    <p><b> Expected date of arrival: </b> {{ post.expectedDate }}</p>
+
+</mat-card>

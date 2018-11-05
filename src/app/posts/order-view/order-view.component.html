@@ -1,0 +1,27 @@
+<mat-card *ngIf="order">
+  <mat-panel-title>
+      <h2>{{ order.title }} </h2>
+  </mat-panel-title>
+
+    <p><b> Seller: </b> {{ order.seller }}</p>
+    <p><b> Tracking number: </b> {{ order.tracking }}</p>
+    <p><b> Status: </b> {{ order.status }}</p>
+    <p><b> Origin: </b> {{ order.origin }}</p>
+    <p><b> Destination: </b> {{ order.destination }}</p>
+    <p><b> Expected date of arrival: </b> {{ order.expectedDate }}</p>
+
+</mat-card>
+
+<div></div>
+<mat-card>
+    <form (submit)="onView()" #viewForm="ngForm" *ngIf="!isLoading">
+      <mat-form-field>
+        <input matInput name="tracking" ngModel type="text" placeholder="Enter another Tracking Number" #trackingInput="ngModel" tracking>
+        <mat-error *ngIf="trackingInput.invalid">Enter a valid tracking number.</mat-error>
+      </mat-form-field>
+      <mat-action-row>
+        <a mat-raised-button color="primary" *ngIf="trackingInput.value" [routerLink]="['/view', trackingInput.value]">VIEW ORDER</a>
+        <a mat-raised-button color="primary" *ngIf="!trackingInput.value">VIEW ORDER</a>
+      </mat-action-row>
+    </form>
+  </mat-card>

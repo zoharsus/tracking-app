@@ -1,0 +1,48 @@
+<!-- <mat-card>
+<form [formGroup]="form" (submit)="onView()" *ngIf="!isLoading">
+    <mat-form-field>
+      <input
+        matInput
+        type="text"
+        formControlName="tracking"
+        placeholder="Enter a tracking number to search an order">
+        <mat-error *ngIf="form.get('tracking').invalid">Enter a post title</mat-error>
+    </mat-form-field>
+    <button
+        mat-raised-button
+        color="primary"
+        type="submit">Get Order</button>
+
+</form>
+</mat-card> -->
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="userIsAuthenticated && posts.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let post of posts">
+    <mat-expansion-panel-header *ngIf="userId == post.creator">
+        <h4>{{ post.title }}</h4>
+    </mat-expansion-panel-header>
+    <p *ngIf="userId == post.creator"> <b> Tracking number: </b>{{ post.tracking }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated && userId == post.creator">
+      <a mat-button color="primary" [routerLink]="['/view', post.id]">VIEW</a>
+      <a mat-button color="primary" [routerLink]="['/edit', post.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(post.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalPosts" [pageSize]="postsPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="userIsAuthenticated && posts.length > 0">
+
+</mat-paginator>
+
+<mat-card>
+  <form (submit)="onView()" #viewForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput name="tracking" ngModel type="text" placeholder="Tracking Number" #trackingInput="ngModel" tracking>
+      <mat-error *ngIf="trackingInput.invalid">Enter a valid tracking number.</mat-error>
+    </mat-form-field>
+    <a mat-raised-button color="primary" [routerLink]="['/view', trackingInput.value]">VIEW ORDER</a>
+  </form>
+</mat-card>
+
+<p class="info-text mat-body-1" *ngIf="userIsAuthenticated && posts.length == 0 && !isLoading">No orders yet, please enter a tracking number.</p>
+<p class="info-text mat-body-1" *ngIf="!userIsAuthenticated && !isLoading">Login or enter a tracking number!</p>

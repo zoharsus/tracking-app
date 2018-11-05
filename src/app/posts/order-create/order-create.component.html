@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSaveOrder()" *ngIf="!isLoading">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Order Title">
+          <mat-error *ngIf="form.get('title').invalid">Enter an order title</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="seller"
+          placeholder="Order Seller">
+          <mat-error *ngIf="form.get('seller').invalid">Enter the order seller</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="tracking"
+          placeholder="Order tracking">
+          <mat-error *ngIf="form.get('tracking').invalid">Enter the order tracking</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="status"
+          placeholder="Order status">
+          <mat-error *ngIf="form.get('status').invalid">Enter an order status</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="origin"
+          placeholder="Order origin">
+          <mat-error *ngIf="form.get('origin').invalid">Enter an order origin</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="destination"
+          placeholder="Order destination">
+          <mat-error *ngIf="form.get('destination').invalid">Enter an order destination</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="expectedDate"
+          placeholder="Order expectedDate">
+          <mat-error *ngIf="form.get('expectedDate').invalid">Enter expected date of arrival</mat-error>
+      </mat-form-field>
+
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">Save Order</button>
+  </form>
+</mat-card>

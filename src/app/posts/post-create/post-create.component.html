@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-spinner *ngIf="isLoading"></mat-spinner>
+  <form [formGroup]="form" (submit)="onSavePost()" *ngIf="!isLoading">
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="title"
+          placeholder="Post Title">
+          <mat-error *ngIf="form.get('title').invalid">Enter a post title</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="seller"
+          placeholder="Post Seller">
+          <mat-error *ngIf="form.get('seller').invalid">Enter a post seller</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="tracking"
+          placeholder="Post tracking">
+          <mat-error *ngIf="form.get('tracking').invalid">Enter a post tracking</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="status"
+          placeholder="Post status">
+          <mat-error *ngIf="form.get('status').invalid">Enter a post status</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="origin"
+          placeholder="Post origin">
+          <mat-error *ngIf="form.get('origin').invalid">Enter a post origin</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="destination"
+          placeholder="Post destination">
+          <mat-error *ngIf="form.get('destination').invalid">Enter a post destination</mat-error>
+      </mat-form-field>
+
+      <mat-form-field>
+        <input
+          matInput
+          type="text"
+          formControlName="expectedDate"
+          placeholder="Post expectedDate">
+          <mat-error *ngIf="form.get('expectedDate').invalid">Enter expected date</mat-error>
+      </mat-form-field>
+
+
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit">Save Post</button>
+  </form>
+</mat-card>

@@ -1,0 +1,6 @@
+{
+  "env": {
+    "MONGO_ATLAS_PW": "WxTfW6ULUkfhDQrh",
+    "JWT_KEY": "Ladingo is cool and nice"
+  }
+}

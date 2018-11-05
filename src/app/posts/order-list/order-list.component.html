@@ -1,0 +1,34 @@
+<mat-spinner *ngIf="isLoading"></mat-spinner>
+<mat-accordion multi="true" *ngIf="userIsAuthenticated && orders.length > 0 && !isLoading">
+  <mat-expansion-panel *ngFor="let order of orders">
+    <mat-expansion-panel-header *ngIf="userId == order.creator">
+        <h4>{{ order.title }}</h4>
+    </mat-expansion-panel-header>
+    <p *ngIf="userId == order.creator"> <b> Tracking number: </b>{{ order.id }}</p>
+    <mat-action-row *ngIf="userIsAuthenticated && userId == order.creator">
+      <a mat-button color="primary" [routerLink]="['/view', order.id]">VIEW</a>
+      <a mat-button color="primary" [routerLink]="['/edit', order.id]">EDIT</a>
+      <button mat-button color="warn" (click)="onDelete(order.id)">DELETE</button>
+    </mat-action-row>
+  </mat-expansion-panel>
+</mat-accordion>
+<mat-paginator [length]="totalOrders" [pageSize]="ordersPerPage" [pageSizeOptions]="pageSizeOptions" (page)="onChangedPage($event)"
+  *ngIf="userIsAuthenticated && orders.length > 0">
+
+</mat-paginator>
+
+<mat-card>
+  <form (submit)="onView()" #viewForm="ngForm" *ngIf="!isLoading">
+    <mat-form-field>
+      <input matInput name="tracking" ngModel type="text" placeholder="Tracking Number" #trackingInput="ngModel" tracking>
+      <mat-error *ngIf="trackingInput.invalid">Enter a valid tracking number.</mat-error>
+    </mat-form-field>
+    <mat-action-row>
+      <a mat-raised-button color="primary" *ngIf="trackingInput.value" [routerLink]="['/view', trackingInput.value]">VIEW ORDER</a>
+      <a mat-raised-button color="primary" *ngIf="!trackingInput.value">LOOKUP ORDER</a>
+    </mat-action-row>
+  </form>
+</mat-card>
+
+<p class="info-text mat-body-1" *ngIf="userIsAuthenticated && orders.length == 0 && !isLoading">No orders yet, please enter a tracking number.</p>
+<p class="info-text mat-body-1" *ngIf="!userIsAuthenticated && !isLoading">Login or enter a tracking number!</p>
